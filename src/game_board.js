@@ -1,4 +1,4 @@
-class Game {
+class GameBoard {
   constructor() {
     this.game_board = {
       a: ['⚪️', '⚪️', '⚪️', '⚪️', '⚪️', '⚪️'],
@@ -11,8 +11,23 @@ class Game {
     }
   }
 
+  isValidColumn(column) {
+    column != null && column.includes('⚪️')
+  }
 
+  placeGamePiece(column, player) {
+    column[column.indexAt('⚪️')] = player.game_piece
+  }
+
+  isFull() {
+    for (const column in this.game_board) {
+      if (this.game_board[column].includes('⚪️')) { 
+        return false
+      }
+    }
+    return true
+  }
 }
 
-var game = new Game()
-console.log(game.game_board)
+var game = new GameBoard()
+console.log(game.isFull())
