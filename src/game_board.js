@@ -1,6 +1,6 @@
 class GameBoard {
   constructor() {
-    this.game_board = {
+    this.columns = {
       a: ['⚪️', '⚪️', '⚪️', '⚪️', '⚪️', '⚪️'],
       b: ['⚪️', '⚪️', '⚪️', '⚪️', '⚪️', '⚪️'],
       c: ['⚪️', '⚪️', '⚪️', '⚪️', '⚪️', '⚪️'],
@@ -12,16 +12,19 @@ class GameBoard {
   }
 
   isValidColumn(column) {
-    column != null && column.includes('⚪️')
+    return this.columns[column] != undefined && this.columns[column].includes('⚪️')
   }
 
   placeGamePiece(column, player) {
-    column[column.indexAt('⚪️')] = player.game_piece
+    let chosenColumn = this.columns[column]
+
+    chosenColumn[chosenColumn.indexOf('⚪️')] = player.gamePiece
+    console.log(this.columns)
   }
 
   isFull() {
-    for (const column in this.game_board) {
-      if (this.game_board[column].includes('⚪️')) { 
+    for (const column in this.columns) {
+      if (this.columns[column].includes('⚪️')) { 
         return false
       }
     }
@@ -29,5 +32,7 @@ class GameBoard {
   }
 }
 
-var game = new GameBoard()
-console.log(game.isFull())
+export { GameBoard }
+
+// var game = new GameBoard()
+// console.log(game.isFull())
